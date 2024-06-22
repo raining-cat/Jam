@@ -31,7 +31,15 @@ public class PlayerJump : MonoBehaviour
         {
            _jumpRemain = jumpCount;
         }
-
-        isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+        
+        //isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isGrounded = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isGrounded = false;
     }
 }

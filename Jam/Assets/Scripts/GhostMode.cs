@@ -6,6 +6,7 @@ public class GhostMode : MonoBehaviour
     public float ghostOpacity = 0.5f;
     public float ghostHardness = 0.1f;
     public Collider2D collider;
+    private Collider2D _colliderOther;
 
     private Rigidbody2D rb;
     private bool isGhostMode = false;
@@ -50,33 +51,27 @@ public class GhostMode : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.white;
             rb.gravityScale = 1;
             rb.drag = 0;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (isGhostMode)
-        {
-            // Проверяем, является ли объект, с которым столкнулся игрок, проходимым в режиме призрака
-            if (other.gameObject.layer == LayerMask.NameToLayer("PassableObject"))
-            {
-                collider.enabled = false;
-                // Можно добавить дополнительную логику, например, изменение скорости движения
-            }
-            else
-            {
-                // Игрок не может проходить сквозь этот объект
-                // Можно добавить логику, например, остановку движения
-            }
+            collider.enabled = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (isGhostMode)
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("PassableObject"))
+            {
+                collision.collider.enabled = false;
+            }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (isGhostMode)
         {
             collider.enabled = true;
         }
+        collision.collider.enabled = true;
     }
-
-
 }
