@@ -60,7 +60,7 @@ public class GhostMode : MonoBehaviour
 
         if (isGhostMode)
         {
-            if (collision.gameObject.layer == LayerMask.NameToLayer("PassableObject"))
+            if (collision.gameObject.layer == LayerMask.NameToLayer("PassableObject") || collision.gameObject.layer == LayerMask.NameToLayer("PassableWall"))
             {
                 collision.collider.enabled = false;
             }
