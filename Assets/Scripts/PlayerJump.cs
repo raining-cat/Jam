@@ -4,69 +4,42 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
-    private Vector2 _gravityVec;
-
-
-    [SerializeField] private int _jumpPower = 1;
-    [SerializeField] private float _fallRatio = 1;
-
-    private float _coyoteTime = 0.2f;
-    private float _coyoteTimeCounter;
-    private float _bufferTime = 0.2f;
-    private float _bufferTimeCounter;
-
-    public Transform groundCheck;
+    public int jumpCount = 2;
+    private int _jumpRemain;
+    public float jumpForce = 15;
+    public float groundCheckRadius = 0.5f;
     public LayerMask groundLayer;
+
+    private Rigidbody2D rb;
+    private bool isGrounded;
+
     private void Start()
     {
-        _gravityVec = new Vector2(0, -Physics2D.gravity.y);
-        _rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        _jumpRemain = jumpCount;
     }
 
-
-
-    private void FixedUpdate()
+    private void Update()
     {
-        if (isGrounded())
+        if (Input.GetButtonDown("Jump") && (isGrounded || _jumpRemain > 0))
         {
-            _coyoteTimeCounter = _coyoteTime;
-        }
-        else
-        {
-            _coyoteTimeCounter -= Time.fixedDeltaTime;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _jumpRemain -= 1;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if(isGrounded)
         {
-            _bufferTimeCounter = _bufferTime;
+           _jumpRemain = jumpCount;
         }
-        else
-        {
-            _bufferTimeCounter -= Time.fixedDeltaTime;
-        }
-
-        if(_bufferTimeCounter > 0f && _coyoteTimeCounter > 0f)
-        {
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpPower);
-            _bufferTimeCounter = 0f;
-        }
-
-
-        if (Input.GetButtonUp("Jump") && _rigidbody.velocity.y > 0f)
-        {
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _rigidbody.velocity.y * 0.5f);
-            _coyoteTimeCounter = 0f;
-        }
-
-        if (_rigidbody.velocity.y < 0)
-        {
-            _rigidbody.velocity -= _gravityVec * _fallRatio * Time.fixedDeltaTime;
-        }
+        
+        //isGrounded = Physics2D.OverlapCircle(transform.position, groundCheckRadius, groundLayer);
     }
-
-    private bool isGrounded()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        isGrounded = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isGrounded = false;
     }
 }
