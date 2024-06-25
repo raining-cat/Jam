@@ -711,6 +711,22 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2530494983737222689, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.16071422
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530494983737222689, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.26947978
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530494983737222689, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.080287404
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530494983737222689, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.13583161
+      objectReference: {fileID: 0}
     - target: {fileID: 2572014706083200467, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -762,6 +778,14 @@ PrefabInstance:
     - target: {fileID: 3418721061046035719, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077192389266557390, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Size.x
+      value: 0.15095715
+      objectReference: {fileID: 0}
+    - target: {fileID: 4077192389266557390, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.079521425
       objectReference: {fileID: 0}
     - target: {fileID: 5465009410277946454, guid: 475830804688cb24b9f010c1e88afcc3, type: 3}
       propertyPath: m_Constraints
